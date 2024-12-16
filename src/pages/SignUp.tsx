@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   });
+  const [error, setError] = useState('');
+
+  const { theme, toggleTheme } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -17,51 +21,134 @@ const SignUp = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
+      setError('Passwords do not match!');
       return;
     }
 
+    setError('');
     console.log('SignUp Data:', formData);
+    alert('Registration successful!');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        className="bg-white p-8 rounded shadow-md w-96"
-        onSubmit={handleSubmit}
+    <div
+      className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
+    >
+      <div
+        style={{
+          boxShadow:
+            '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        }}
+        className={`max-w-lg w-full ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-xl overflow-hidden`}
       >
-        <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        <div className="p-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2
+              className={`text-center text-3xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
+            >
+              Welcome Back
+            </h2>
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded ${theme === 'dark' ? 'bg-gray-700 text-gray-200' : 'bg-gray-200 text-gray-700'}`}
+            >
+              {theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+            </button>
+          </div>
+          <p
+            className={`mt-4 text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+          >
+            Sign in to continue
+          </p>
+          {error && <p className="text-center text-red-500 mt-4">{error}</p>}
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <div className="rounded-md shadow-sm">
+              <div>
+                <label className="sr-only" htmlFor="email">
+                  Email address
+                </label>
+                <input
+                  placeholder="Email address"
+                  className={`appearance-none relative block w-full px-3 py-3 border ${
+                    theme === 'dark'
+                      ? 'border-gray-700 bg-gray-700 text-white'
+                      : 'border-gray-300 bg-gray-200 text-gray-900'
+                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                  required
+                  autoComplete="email"
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mt-4">
+                <label className="sr-only" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  placeholder="Password"
+                  className={`appearance-none relative block w-full px-3 py-3 border ${
+                    theme === 'dark'
+                      ? 'border-gray-700 bg-gray-700 text-white'
+                      : 'border-gray-300 bg-gray-200 text-gray-900'
+                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                  required
+                  autoComplete="current-password"
+                  type="password"
+                  name="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mt-4">
+                <label className="sr-only" htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
+                <input
+                  placeholder="Confirm Password"
+                  className={`appearance-none relative block w-full px-3 py-3 border ${
+                    theme === 'dark'
+                      ? 'border-gray-700 bg-gray-700 text-white'
+                      : 'border-gray-300 bg-gray-200 text-gray-900'
+                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                  required
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-gray-900 bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="submit"
+              >
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          className={`px-8 py-4 ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'} text-center`}
         >
-          Sign Up
-        </button>
-      </form>
+          <span
+            className={`text-gray-400 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+          >
+            Don't have an account?
+          </span>
+          <a
+            className="font-medium text-indigo-500 hover:text-indigo-400"
+            href="/login"
+          >
+            Sign In
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
