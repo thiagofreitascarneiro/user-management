@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Login: React.FC = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,7 +16,6 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // API call here (login)
     console.log('Login Data:', formData);
   };
 

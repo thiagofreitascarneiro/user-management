@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SignUp: React.FC = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,7 +21,6 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    // API call here (signup)
     console.log('SignUp Data:', formData);
   };
 
