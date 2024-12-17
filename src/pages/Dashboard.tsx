@@ -5,7 +5,7 @@ import { fetchUsers } from '../services/api';
 import { User, PaginatedUsersResponse } from '../@types/userTypes';
 import CardUser from '../components/CardUser';
 import avatar from '../assets/avatar.jpg';
-import Loading from '../components/Loading';
+import LoadingWithMessage from '../components/Modal-loading';
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -20,6 +20,8 @@ const Dashboard: React.FC = () => {
     email: '',
     avatar: avatar,
   });
+  const [modalOpen, setModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<number | null>(null);
   const { token } = useAuth();
   const navigate = useNavigate();
 
@@ -74,10 +76,6 @@ const Dashboard: React.FC = () => {
     });
   };
 
-  const handleDeleteUser = (id: number) => {
-    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-  };
-
   const handleUpdateUser = (user: User) => {
     setEditUser(user);
     setNewUser({ ...user });
@@ -102,16 +100,40 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleDeleteUser = () => {
+    if (userToDelete) {
+      setUsers((prevUsers) =>
+        prevUsers.filter((user) => user.id !== userToDelete)
+      );
+      setModalOpen(false);
+      setUserToDelete(null);
+    }
+  };
+
+  const openDeleteModal = (id: number) => {
+    setUserToDelete(id);
+    setModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setModalOpen(false);
+    setUserToDelete(null);
+  };
+
   if (loading) {
     return (
       <div className="text-center py-10">
-        <Loading />
+        <LoadingWithMessage
+          message="Loading users, please wait..."
+          onConfirm={() => {}}
+          onCancel={() => {}}
+        />
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg">
+    <div className="bg-white dark:bg-gray-900 p-6 ">
       <h2 className="text-2xl text-center mx-9 font-bold text-gray-800 dark:text-white mb-6">
         User Management Dashboard
       </h2>
@@ -165,7 +187,7 @@ const Dashboard: React.FC = () => {
           <CardUser
             key={user.id}
             user={user}
-            onDelete={handleDeleteUser}
+            onDelete={() => openDeleteModal(user.id)}
             onEdit={handleUpdateUser}
           />
         ))}
@@ -210,6 +232,14 @@ const Dashboard: React.FC = () => {
           </li>
         </ul>
       </nav>
+
+      {modalOpen && (
+        <LoadingWithMessage
+          message="Are you sure you want to delete this user?"
+          onConfirm={handleDeleteUser}
+          onCancel={closeDeleteModal}
+        />
+      )}
     </div>
   );
 };
