@@ -1,17 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
+import Welcome from '../pages/Welcome';
 
 const PrivateRoutes = () => {
-  //   const { isAuthenticated } = useAuth();
-
-  //   if (!isAuthenticated) {
-  //     return <Navigate to="/login" />;
-  //   }
-
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/welcome" element={<Welcome />} />
     </Routes>
   );
 };

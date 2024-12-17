@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { signUp } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const SignUp: React.FC = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const { login } = useAuth();
 
   const { theme } = useTheme();
 
@@ -18,16 +21,23 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match!');
       return;
     }
 
-    setError('');
-    console.log('SignUp Data:', formData);
-    alert('Registration successful!');
+    try {
+      const response = await signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+      login(response.data.token, { email: formData.email });
+    } catch {
+      setError('Registration failed. Please try again.');
+    }
   };
 
   return (

@@ -11,4 +11,6 @@ export const signUp = (data: { email: string; password: string }) =>
 export const login = (data: { email: string; password: string }) =>
   api.post('/login', data);
 
+export const fetchUserById = (id: number) => api.get(`/users/${id}`);
+
 export default api;
