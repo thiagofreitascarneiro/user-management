@@ -111,6 +111,12 @@ const Login: React.FC = () => {
                 Login
               </button>
             </div>
+            {/* Exibir o erro aqui */}
+            {error && (
+              <div className="mt-4 text-center text-red-500 text-sm">
+                {error}
+              </div>
+            )}
           </form>
         </div>
         <div

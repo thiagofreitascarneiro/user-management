@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { PaginatedUsersResponse } from '../@types/userTypes';
 
 const api = axios.create({
   baseURL: 'https://reqres.in/api', 
@@ -13,8 +14,8 @@ export const login = (data: { email: string; password: string }) =>
 
 export const fetchUserById = (id: number) => api.get(`/users/${id}`);
 
-export const fetchUsers = (page: number) => {
-  return api.get(`/users?page=${page}`);
+export const fetchUsers = (page: number): Promise<PaginatedUsersResponse> => {
+  return api.get(`/users?page=${page}`).then(response => response.data);
 };
 
 export default api;

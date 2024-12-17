@@ -5,9 +5,9 @@ import Dashboard from '../pages/Dashboard';
 import Welcome from '../pages/Welcome';
 
 const PrivateRoutes = () => {
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (!user) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
