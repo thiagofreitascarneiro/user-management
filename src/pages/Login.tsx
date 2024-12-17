@@ -1,6 +1,6 @@
+// src/pages/Login.tsx
 import React, { useState } from 'react';
-import { useTheme } from '../context/ThemeContext';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext'; // Importando o useAuth
 import { login as apiLogin } from '../services/api';
 
 const Login: React.FC = () => {
@@ -9,7 +9,6 @@ const Login: React.FC = () => {
     password: '',
   });
 
-  const { theme } = useTheme();
   const [error, setError] = useState('');
   const { login } = useAuth();
 
@@ -29,35 +28,21 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'
-      }`}
-    >
+    <div className="min-h-screen flex items-center justify-center to-indigo-800 dark:bg-gray-900">
       <div
         style={{
           boxShadow:
             '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         }}
-        className={`max-w-lg w-full ${
-          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-        } rounded-lg shadow-xl overflow-hidden`}
+        className="max-w-lg w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden"
       >
         <div className="p-8">
           <div className="flex justify-between items-center mb-4">
-            <h2
-              className={`text-center text-3xl font-extrabold ${
-                theme === 'dark' ? 'text-white' : 'text-gray-900'
-              }`}
-            >
+            <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-white">
               Welcome Back
             </h2>
           </div>
-          <p
-            className={`mt-4 text-start ${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
+          <p className="mt-4 text-start text-gray-600 dark:text-gray-400">
             Sign in to continue
           </p>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -68,11 +53,7 @@ const Login: React.FC = () => {
                 </label>
                 <input
                   placeholder="Email address"
-                  className={`appearance-none relative block w-full px-3 py-3 border ${
-                    theme === 'dark'
-                      ? 'border-gray-700 bg-gray-700 text-white'
-                      : 'border-gray-300 bg-gray-200 text-gray-900'
-                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                  className="appearance-none relative block w-full px-3 py-3 border border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                   autoComplete="email"
                   type="email"
@@ -88,11 +69,7 @@ const Login: React.FC = () => {
                 </label>
                 <input
                   placeholder="Password"
-                  className={`appearance-none relative block w-full px-3 py-3 border ${
-                    theme === 'dark'
-                      ? 'border-gray-700 bg-gray-700 text-white'
-                      : 'border-gray-300 bg-gray-200 text-gray-900'
-                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
+                  className="appearance-none relative block w-full px-3 py-3 border border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                   autoComplete="current-password"
                   type="password"
@@ -105,13 +82,13 @@ const Login: React.FC = () => {
             </div>
             <div>
               <button
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-gray-900 bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-gray-900 dark:text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 type="submit"
               >
                 Login
               </button>
             </div>
-            {/* Exibir o erro aqui */}
+
             {error && (
               <div className="mt-4 text-center text-red-500 text-sm">
                 {error}
@@ -119,16 +96,8 @@ const Login: React.FC = () => {
             )}
           </form>
         </div>
-        <div
-          className={`px-8 py-4 ${
-            theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'
-          } text-center`}
-        >
-          <span
-            className={`${
-              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-            }`}
-          >
+        <div className="px-8 py-4 bg-gray-100 dark:bg-gray-700 text-center">
+          <span className="text-gray-600 dark:text-gray-400">
             Don't have an account?
           </span>
           <a

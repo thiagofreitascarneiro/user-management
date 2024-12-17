@@ -23,7 +23,7 @@ const Header: React.FC = () => {
               <li>
                 <a
                   href="/dashboard"
-                  className="hover:text-gray-500 dark:hover:text-gray-300 transition-colors"
+                  className="hover:text-gray-500 dark:hover:text-gray-300 dark:text-white transition-colors"
                 >
                   Dashboard
                 </a>
