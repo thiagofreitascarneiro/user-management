@@ -13,4 +13,8 @@ export const login = (data: { email: string; password: string }) =>
 
 export const fetchUserById = (id: number) => api.get(`/users/${id}`);
 
+export const fetchUsers = (page: number) => {
+  return api.get(`/users?page=${page}`);
+};
+
 export default api;

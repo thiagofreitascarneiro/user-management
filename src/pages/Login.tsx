@@ -3,13 +3,8 @@ import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 import { login as apiLogin } from '../services/api';
 
-interface LoginFormData {
-  email: string;
-  password: string;
-}
-
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<LoginFormData>({
+  const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
@@ -77,7 +72,7 @@ const Login: React.FC = () => {
                     theme === 'dark'
                       ? 'border-gray-700 bg-gray-700 text-white'
                       : 'border-gray-300 bg-gray-200 text-gray-900'
-                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                   required
                   autoComplete="email"
                   type="email"
@@ -97,7 +92,7 @@ const Login: React.FC = () => {
                     theme === 'dark'
                       ? 'border-gray-700 bg-gray-700 text-white'
                       : 'border-gray-300 bg-gray-200 text-gray-900'
-                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm`}
                   required
                   autoComplete="current-password"
                   type="password"
@@ -108,11 +103,6 @@ const Login: React.FC = () => {
                 />
               </div>
             </div>
-            {error && (
-              <div className="text-red-500 text-sm mt-2 text-center">
-                {error}
-              </div>
-            )}
             <div>
               <button
                 className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-gray-900 bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

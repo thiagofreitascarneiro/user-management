@@ -6,34 +6,37 @@ const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <label className="relative inline-flex items-center cursor-pointer">
-      <input
-        type="checkbox"
-        className="sr-only peer"
-        onChange={toggleTheme}
-        checked={theme === 'dark'}
-      />
-      <div
-        className={`w-20 h-10 rounded-full bg-gray-200 peer-checked:bg-gray-800 flex items-center justify-between px-2 transition-all duration-500`}
-      >
-        {/* Ícone de Sol */}
+    <button
+      onClick={toggleTheme}
+      className="focus:outline-none transition-all duration-300"
+      style={{
+        transition: 'background-color 0.3s ease, transform 0.3s ease',
+      }}
+    >
+      {theme === 'dark' ? (
         <Sun
           size={24}
           weight="bold"
-          className={`text-yellow-500 transition-opacity duration-500 ${
-            theme === 'dark' ? 'opacity-0' : 'opacity-100'
-          }`}
+          className="text-white transition-opacity duration-300"
+          style={{
+            opacity: theme === 'dark' ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+            transform: 'scale(1.2)',
+          }}
         />
-        {/* Ícone de Lua */}
+      ) : (
         <Moon
           size={24}
           weight="bold"
-          className={`text-gray-300 transition-opacity duration-500 ${
-            theme === 'dark' ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="text-gray-800 transition-opacity duration-300"
+          style={{
+            opacity: theme === 'dark' ? 0 : 1,
+            transition: 'opacity 0.3s ease',
+            transform: 'scale(1.2)',
+          }}
         />
-      </div>
-    </label>
+      )}
+    </button>
   );
 };
 
