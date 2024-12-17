@@ -9,7 +9,7 @@ const SignUp: React.FC = () => {
   });
   const [error, setError] = useState('');
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -48,15 +48,9 @@ const SignUp: React.FC = () => {
             >
               Welcome Back
             </h2>
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded ${theme === 'dark' ? 'bg-gray-700 text-gray-200' : 'bg-gray-200 text-gray-700'}`}
-            >
-              {theme === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}
-            </button>
           </div>
           <p
-            className={`mt-4 text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+            className={`mt-4 text-start ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
           >
             Sign in to continue
           </p>
