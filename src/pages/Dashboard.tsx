@@ -1,4 +1,3 @@
-// src/pages/Dashboard.tsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -6,12 +5,14 @@ import { fetchUsers } from '../services/api';
 import { User, PaginatedUsersResponse } from '../@types/userTypes';
 import CardUser from '../components/CardUser';
 import avatar from '../assets/avatar.jpg';
+import Loading from '../components/Loading';
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [editUser, setEditUser] = useState<User | null>(null);
   const [newUser, setNewUser] = useState<User>({
     id: 0,
     first_name: '',
@@ -73,8 +74,40 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  const handleDeleteUser = (id: number) => {
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+  };
+
+  const handleUpdateUser = (user: User) => {
+    setEditUser(user);
+    setNewUser({ ...user });
+  };
+
+  const handleSubmitUpdateUser = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editUser) {
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === editUser.id ? { ...user, ...newUser } : user
+        )
+      );
+      setEditUser(null);
+      setNewUser({
+        id: 0,
+        first_name: '',
+        last_name: '',
+        email: '',
+        avatar: avatar,
+      });
+    }
+  };
+
   if (loading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return (
+      <div className="text-center py-10">
+        <Loading />
+      </div>
+    );
   }
 
   return (
@@ -83,46 +116,58 @@ const Dashboard: React.FC = () => {
         User Management Dashboard
       </h2>
 
-      {/* Formulário de Criação de Usuário */}
-      <form onSubmit={handleSubmitCreateUser}>
+      <form
+        onSubmit={editUser ? handleSubmitUpdateUser : handleSubmitCreateUser}
+        className="max-w-lg mx-auto"
+      >
         <div className="space-y-4">
+          <div className="flex space-x-4">
+            <input
+              type="text"
+              value={newUser.first_name}
+              onChange={(e) =>
+                setNewUser({ ...newUser, first_name: e.target.value })
+              }
+              placeholder="First Name"
+              required
+              className="w-full px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
+            />
+            <input
+              type="text"
+              value={newUser.last_name}
+              onChange={(e) =>
+                setNewUser({ ...newUser, last_name: e.target.value })
+              }
+              required
+              placeholder="Last Name"
+              className="w-full px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
           <input
-            type="text"
-            value={newUser.first_name}
-            onChange={(e) =>
-              setNewUser({ ...newUser, first_name: e.target.value })
-            }
-            placeholder="First Name"
-            className="w-1/3 px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
-          />
-          <input
-            type="text"
-            value={newUser.last_name}
-            onChange={(e) =>
-              setNewUser({ ...newUser, last_name: e.target.value })
-            }
-            placeholder="Last Name"
-            className="w-1/3 px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
-          />
-          <input
+            required
             type="email"
             value={newUser.email}
             onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
             placeholder="Email"
-            className="1/3 px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:bg-gray-700 dark:text-white"
           />
           <button
             type="submit"
-            className="w-full py-2 mt-4 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors"
+            className="w-32 py-2 mt-4 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition-colors mx-auto block"
           >
-            Create User
+            {editUser ? 'Update User' : 'Create User'}
           </button>
         </div>
       </form>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
         {users.slice(0, USERS_PER_PAGE).map((user: User) => (
-          <CardUser key={user.id} user={user} />
+          <CardUser
+            key={user.id}
+            user={user}
+            onDelete={handleDeleteUser}
+            onEdit={handleUpdateUser}
+          />
         ))}
       </div>
 
