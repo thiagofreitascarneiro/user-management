@@ -53,7 +53,7 @@ const Login: React.FC = () => {
                 </label>
                 <input
                   placeholder="Email address"
-                  className="appearance-none relative block w-full px-3 py-3 border border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-3 border dark:border-none border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                   autoComplete="email"
                   type="email"
@@ -69,7 +69,7 @@ const Login: React.FC = () => {
                 </label>
                 <input
                   placeholder="Password"
-                  className="appearance-none relative block w-full px-3 py-3 border border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none dark:border-none relative block w-full px-3 py-3 border border-gray-300 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                   autoComplete="current-password"
                   type="password"

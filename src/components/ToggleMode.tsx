@@ -15,7 +15,7 @@ const ThemeToggle: React.FC = () => {
     >
       {theme === 'dark' ? (
         <Sun
-          size={24}
+          size={22}
           weight="bold"
           className="text-white transition-opacity duration-300"
           style={{
@@ -26,7 +26,7 @@ const ThemeToggle: React.FC = () => {
         />
       ) : (
         <Moon
-          size={24}
+          size={22}
           weight="bold"
           className="text-gray-800 transition-opacity duration-300"
           style={{

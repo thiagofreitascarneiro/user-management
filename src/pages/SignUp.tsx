@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { signUp } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
 const SignUp: React.FC = () => {
@@ -10,7 +9,7 @@ const SignUp: React.FC = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { register } = useAuth();
 
   const { theme } = useTheme();
 
@@ -30,11 +29,7 @@ const SignUp: React.FC = () => {
     }
 
     try {
-      const response = await signUp({
-        email: formData.email,
-        password: formData.password,
-      });
-      login(response.data.token, { email: formData.email });
+      register(formData.email, formData.password);
     } catch {
       setError('Registration failed. Please try again.');
     }

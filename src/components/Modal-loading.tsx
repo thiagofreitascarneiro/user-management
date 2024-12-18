@@ -12,7 +12,7 @@ const LoadingWithMessage: React.FC<LoadingWithMessageProps> = ({
   onCancel,
 }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-80">
         <h3 className="text-xl mb-4">{message}</h3>
         <div className="flex justify-between">

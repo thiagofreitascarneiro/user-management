@@ -2,10 +2,26 @@ import React, { useState } from 'react';
 import ThemeToggle from './ToggleMode';
 import logo from '../assets/logo.png';
 import { useAuth } from '../context/AuthContext';
+import { Power } from 'phosphor-react';
+import LoadingWithMessage from '../components/Modal-loading';
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleLogoutClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmLogout = () => {
+    logout();
+    setIsModalOpen(false);
+  };
+
+  const handleCancelLogout = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <header className="bg-white dark:bg-gray-900 shadow">
@@ -39,10 +55,10 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-6">
           {user ? (
             <button
-              onClick={logout}
-              className="bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition-colors"
+              onClick={handleLogoutClick} // Muda a função para abrir o modal
+              className="text-indigo-500 hover:text-indigo-600 transition-colors"
             >
-              Log Out
+              <Power size={28} />
             </button>
           ) : (
             <button
@@ -55,12 +71,20 @@ const Header: React.FC = () => {
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-3xl cursor-pointer md:hidden focus:outline-none"
+            className="text-3xl cursor-pointer md:hidden dark:text-white focus:outline-none"
           >
             {menuOpen ? '✖️' : '☰'}
           </button>
         </div>
       </nav>
+
+      {isModalOpen && (
+        <LoadingWithMessage
+          message="Are you sure you want to log out?"
+          onConfirm={handleConfirmLogout}
+          onCancel={handleCancelLogout}
+        />
+      )}
     </header>
   );
 };
