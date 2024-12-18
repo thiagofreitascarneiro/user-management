@@ -11,7 +11,10 @@ interface CardUserProps {
 
 const CardUser: React.FC<CardUserProps> = ({ user, onDelete, onEdit }) => {
   return (
-    <div className="flex items-center justify-center">
+    <div
+      className="flex items-center justify-center"
+      data-testid={`user-card-${user.id}`}
+    >
       <div className="bg-white font-semibold text-center rounded-3xl border dark:border-none shadow-lg p-10 max-w-xs transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer dark:bg-gray-800 dark:text-white">
         <img
           className="mb-3 w-32 h-32 rounded-full shadow-lg mx-auto"
