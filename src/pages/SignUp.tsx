@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
             <h2
               className={`text-center text-3xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}
             >
-              Welcome Back
+              Welcome to the platform
             </h2>
           </div>
           <p

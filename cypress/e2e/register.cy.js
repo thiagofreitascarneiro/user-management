@@ -1,12 +1,14 @@
-it('should load the sign-up page', () => {
-    cy.visit('/register'); 
-  
-    cy.contains('Welcome Back').should('be.visible'); 
-    cy.get('input[name="email"]').should('be.visible'); 
-    cy.get('input[name="password"]').should('be.visible'); 
-    cy.get('input[name="confirmPassword"]').should('be.visible');
-    cy.get('button[type="submit"]').should('contain', 'Sign Up');
-  });
+
+describe('Login Page', () => {
+    it('should load the sign-up page', () => {
+        cy.visit('/register'); 
+    
+        cy.contains('Welcome to the platform').should('be.visible'); 
+        cy.get('input[name="email"]').should('be.visible'); 
+        cy.get('input[name="password"]').should('be.visible'); 
+        cy.get('input[name="confirmPassword"]').should('be.visible');
+        cy.get('button[type="submit"]').should('contain', 'Sign Up');
+    });
   
   it('should display an error when passwords do not match', () => {
     cy.visit('/register');
@@ -66,6 +68,4 @@ it('should load the sign-up page', () => {
     cy.get('input[name="password"]:invalid').should('exist');
   });
   
-  
-  
-  
+});
