@@ -5,7 +5,8 @@ import { fetchUsers } from '../services/api';
 import { User, PaginatedUsersResponse } from '../@types/userTypes';
 import CardUser from '../components/CardUser';
 import avatar from '../assets/avatar.jpg';
-import LoadingWithMessage from '../components/Modal-loading';
+import ModalClose from '../components/ModalClose';
+import Loading from '../components/Loading';
 
 const Dashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -30,6 +31,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (!token) {
       navigate('/login');
+      return;
     }
 
     const fetchData = async () => {
@@ -123,11 +125,7 @@ const Dashboard: React.FC = () => {
   if (loading) {
     return (
       <div className="text-center py-10">
-        <LoadingWithMessage
-          message="Loading users, please wait..."
-          onConfirm={() => {}}
-          onCancel={() => {}}
-        />
+        <Loading />
       </div>
     );
   }
@@ -234,7 +232,7 @@ const Dashboard: React.FC = () => {
       </nav>
 
       {modalOpen && (
-        <LoadingWithMessage
+        <ModalClose
           message="Are you sure you want to delete this user?"
           onConfirm={handleDeleteUser}
           onCancel={closeDeleteModal}

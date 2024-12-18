@@ -12,10 +12,24 @@ export const signUp = (data: { email: string; password: string }) =>
 export const login = (data: { email: string; password: string }) =>
   api.post('/login', data);
 
-export const fetchUserById = (id: number) => api.get(`/users/${id}`);
+export const fetchUserById = (id: number) => {
+  const token = localStorage.getItem('token');
+  return api.get(`/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const fetchUsers = (page: number): Promise<PaginatedUsersResponse> => {
-  return api.get(`/users?page=${page}`).then(response => response.data);
+  const token = localStorage.getItem('token'); 
+  return api
+    .get(`/users?page=${page}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(response => response.data);
 };
 
 export default api;

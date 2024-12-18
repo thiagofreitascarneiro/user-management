@@ -3,7 +3,7 @@ import ThemeToggle from './ToggleMode';
 import logo from '../assets/logo.png';
 import { useAuth } from '../context/AuthContext';
 import { Power } from 'phosphor-react';
-import LoadingWithMessage from '../components/Modal-loading';
+import ModalClose from './ModalClose';
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
       </nav>
 
       {isModalOpen && (
-        <LoadingWithMessage
+        <ModalClose
           message="Are you sure you want to log out?"
           onConfirm={handleConfirmLogout}
           onCancel={handleCancelLogout}
