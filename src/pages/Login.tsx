@@ -27,7 +27,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center to-indigo-800 dark:bg-gray-900">
+    <div className="min-h-screen flex items-center p-10 md:p-0 justify-center to-indigo-800 dark:bg-gray-900">
       <div
         style={{
           boxShadow:

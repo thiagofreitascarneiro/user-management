@@ -37,7 +37,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
+      className={`min-h-screen p-10 md:p-0 flex items-center justify-center ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
     >
       <div
         style={{

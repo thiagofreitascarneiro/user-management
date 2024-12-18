@@ -30,6 +30,7 @@ const Header: React.FC = () => {
           <img className="w-10 cursor-pointer" src={logo} alt="Logo" />
         </div>
 
+        {/* Navigation Links */}
         <div
           className={`nav-links md:flex md:justify-end flex-1 md:w-auto w-full absolute md:static bg-white dark:bg-gray-900 md:min-h-fit min-h-[60vh] left-0 
             ${menuOpen ? 'top-[70px]' : 'top-[-100%]'} md:flex-row flex-col items-center px-5 transition-all duration-500`}
@@ -45,14 +46,15 @@ const Header: React.FC = () => {
                 </a>
               </li>
             )}
-
-            <li>
-              <ThemeToggle />
-            </li>
           </ul>
         </div>
 
+        {/* Buttons Outside the Menu */}
         <div className="flex items-center gap-6">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
+          {/* Logout or Sign In */}
           {user ? (
             <button
               onClick={handleLogoutClick}
@@ -69,6 +71,7 @@ const Header: React.FC = () => {
             </button>
           )}
 
+          {/* Hamburger Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-3xl cursor-pointer md:hidden dark:text-white focus:outline-none"
