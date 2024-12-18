@@ -75,13 +75,13 @@ This project is a technical challenge to create a back-office user-management sy
 1. Build the Docker image:
 
    ```bash
-   docker build -t user-management-system .
+      docker-compose build
    ```
 
 2. Run the container:
 
    ```bash
-   docker run -p 5173:5173 user-management-system
+      docker-compose up
    ```
 
    The application will be available at `http://localhost:5173/`.
