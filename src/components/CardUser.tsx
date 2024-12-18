@@ -1,4 +1,3 @@
-// src/components/CardUser.tsx
 import React from 'react';
 import { User } from '../@types/userTypes';
 import { PencilSimple, Trash } from 'phosphor-react';

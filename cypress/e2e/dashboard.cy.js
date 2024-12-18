@@ -200,8 +200,6 @@ describe('Dashboard Page', () => {
       
         cy.get('[data-testid^="user-card-"]').should('have.length', 6);
     });
-      
-      
-      
-  });
+       
+});
   

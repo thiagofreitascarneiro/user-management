@@ -55,7 +55,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-6">
           {user ? (
             <button
-              onClick={handleLogoutClick} // Muda a função para abrir o modal
+              onClick={handleLogoutClick}
               className="text-indigo-500 hover:text-indigo-600 transition-colors"
             >
               <Power size={28} />

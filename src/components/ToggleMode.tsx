@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon } from 'phosphor-react'; // Ícones do Phosphor
+import { Sun, Moon } from 'phosphor-react';
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();

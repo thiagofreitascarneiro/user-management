@@ -1,6 +1,5 @@
-// src/pages/Login.tsx
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Importando o useAuth
+import { useAuth } from '../context/AuthContext';
 import { login as apiLogin } from '../services/api';
 
 const Login: React.FC = () => {
